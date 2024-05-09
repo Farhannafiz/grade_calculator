@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+test.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">time</span>
+<span class="s0">from </span><span class="s1">selenium </span><span class="s0">import </span><span class="s1">webdriver</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">common</span><span class="s2">.</span><span class="s1">by </span><span class="s0">import </span><span class="s1">By</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support</span><span class="s2">.</span><span class="s1">ui </span><span class="s0">import </span><span class="s1">WebDriverWait</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support </span><span class="s0">import </span><span class="s1">expected_conditions </span><span class="s0">as </span><span class="s1">EC</span>
+
+<span class="s1">driver </span><span class="s2">= </span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">Chrome</span><span class="s2">()</span>
+<span class="s1">driver</span><span class="s2">.</span><span class="s1">maximize_window</span><span class="s2">()</span>
+
+<span class="s1">driver</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">&quot;https://softekogradecalculator.netlify.app/calculator/grade-calculator?type=percentage&quot;</span><span class="s2">)</span>
+
+<span class="s1">wait </span><span class="s2">= </span><span class="s1">WebDriverWait</span><span class="s2">(</span><span class="s1">driver</span><span class="s2">, </span><span class="s4">10</span><span class="s2">)  </span><span class="s5"># Increased wait time</span>
+<span class="s5"># Wait until the &quot;+ Add new row&quot; button is clickable</span>
+<span class="s1">add_new_row_button </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//button[normalize-space(text())='+ Add new row']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s1">assignment_input </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//input[@placeholder='e.g Assignment']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s5"># Send a value to this input field</span>
+<span class="s1">assignment_input</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;Assignment&quot;</span><span class="s2">)</span>
+
+<span class="s1">Grade_input </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//input[@name='rows.0.grade']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s5"># Send a value to this input field</span>
+<span class="s1">Grade_input</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;50&quot;</span><span class="s2">)</span>
+
+<span class="s1">weight_input </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//input[@name='rows.0.weight']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s5"># Send a value to this input field</span>
+<span class="s1">weight_input</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;100&quot;</span><span class="s2">)</span>
+
+<span class="s1">project_input </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//input[@placeholder='e.g Project']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s5"># Send a value to this input field</span>
+<span class="s1">project_input</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;python&quot;</span><span class="s2">)</span>
+
+<span class="s1">Grade_input1 </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//input[@name='rows.1.grade']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s5"># Send a value to this input field</span>
+<span class="s1">Grade_input1</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;45&quot;</span><span class="s2">)</span>
+
+<span class="s1">weight_input1 </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//input[@name='rows.1.weight']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s5"># Send a value to this input field</span>
+<span class="s1">weight_input1</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;60&quot;</span><span class="s2">)</span>
+<span class="s1">time</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">2</span><span class="s2">)</span>
+
+<span class="s1">button1 </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//div[@id='targeted-container']//div[3]//button[1]//*[name()='svg']//*[name()='path' and contains(@d,'M6.914 4.7')]&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s1">time</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">1</span><span class="s2">)</span>
+<span class="s1">reset_clear </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//button[normalize-space()='Reset/Clear']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+
+<span class="s5"># Attempt to click the button</span>
+<span class="s0">try</span><span class="s2">:</span>
+    <span class="s1">add_new_row_button</span><span class="s2">.</span><span class="s1">click</span><span class="s2">()</span>
+<span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+    <span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Error clicking the button:&quot;</span><span class="s2">, </span><span class="s1">str</span><span class="s2">(</span><span class="s1">e</span><span class="s2">))</span>
+    <span class="s5"># If normal click fails, try JavaScript click</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">execute_script</span><span class="s2">(</span><span class="s3">&quot;arguments[0].click();&quot;</span><span class="s2">, </span><span class="s1">add_new_row_button</span><span class="s2">)</span>
+<span class="s1">time</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">1</span><span class="s2">)</span>
+
+<span class="s0">try</span><span class="s2">:</span>
+    <span class="s1">button1</span><span class="s2">.</span><span class="s1">click</span><span class="s2">()</span>
+<span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+    <span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Error clicking the button:&quot;</span><span class="s2">, </span><span class="s1">str</span><span class="s2">(</span><span class="s1">e</span><span class="s2">))</span>
+    <span class="s5"># If normal click fails, try JavaScript click</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">execute_script</span><span class="s2">(</span><span class="s3">&quot;arguments[0].click();&quot;</span><span class="s2">, </span><span class="s1">button1</span><span class="s2">)</span>
+
+<span class="s1">time</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">1</span><span class="s2">)</span>
+
+
+<span class="s0">try</span><span class="s2">:</span>
+    <span class="s1">reset_clear</span><span class="s2">.</span><span class="s1">click</span><span class="s2">()</span>
+<span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+    <span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Error clicking the button:&quot;</span><span class="s2">, </span><span class="s1">str</span><span class="s2">(</span><span class="s1">e</span><span class="s2">))</span>
+    <span class="s5"># If normal click fails, try JavaScript click</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">execute_script</span><span class="s2">(</span><span class="s3">&quot;arguments[0].click();&quot;</span><span class="s2">, </span><span class="s1">reset_clear</span><span class="s2">)</span>
+
+<span class="s5"># Continue with any other actions or close</span>
+<span class="s1">input</span><span class="s2">(</span><span class="s3">&quot;Press Enter to close...&quot;</span><span class="s2">)</span>
+
+<span class="s1">driver</span><span class="s2">.</span><span class="s1">quit</span><span class="s2">()</span>
+</pre>
+</body>
+</html>

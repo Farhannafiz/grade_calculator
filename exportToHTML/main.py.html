@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">time</span>
+<span class="s0">from </span><span class="s1">selenium </span><span class="s0">import </span><span class="s1">webdriver</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">common</span><span class="s2">.</span><span class="s1">by </span><span class="s0">import </span><span class="s1">By</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support</span><span class="s2">.</span><span class="s1">ui </span><span class="s0">import </span><span class="s1">WebDriverWait</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support </span><span class="s0">import </span><span class="s1">expected_conditions </span><span class="s0">as </span><span class="s1">EC</span>
+
+
+<span class="s1">driver </span><span class="s2">= </span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">Chrome</span><span class="s2">()</span>
+<span class="s1">driver</span><span class="s2">.</span><span class="s1">maximize_window</span><span class="s2">()</span>
+
+<span class="s1">driver</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">&quot;https://softekogradecalculator.netlify.app/calculator/grade-calculator?type=percentage&quot;</span><span class="s2">)</span>
+<span class="s1">time</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">10</span><span class="s2">)</span>
+
+
+<span class="s0">def </span><span class="s1">webdriverWait</span><span class="s2">(</span><span class="s1">driver</span><span class="s2">, </span><span class="s1">param</span><span class="s2">):</span>
+    <span class="s0">pass</span>
+
+
+<span class="s1">wait </span><span class="s2">= </span><span class="s1">webdriverWait</span><span class="s2">(</span><span class="s1">driver</span><span class="s2">, </span><span class="s4">10</span><span class="s2">)</span>
+
+<span class="s1">add_new_row_button </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+    <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//button[normalize-space(text())='+ Add new row']&quot;</span><span class="s2">))</span>
+<span class="s2">)</span>
+
+<span class="s1">add_new_row_button</span><span class="s2">.</span><span class="s1">click</span><span class="s2">()</span>
+</pre>
+</body>
+</html>

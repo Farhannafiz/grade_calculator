@@ -1,0 +1,144 @@
+<html>
+<head>
+<title>test5.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+test5.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">time</span>
+<span class="s0">from </span><span class="s1">selenium </span><span class="s0">import </span><span class="s1">webdriver</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">common</span><span class="s2">.</span><span class="s1">by </span><span class="s0">import </span><span class="s1">By</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support</span><span class="s2">.</span><span class="s1">ui </span><span class="s0">import </span><span class="s1">WebDriverWait</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support </span><span class="s0">import </span><span class="s1">expected_conditions </span><span class="s0">as </span><span class="s1">EC</span>
+
+<span class="s3"># Initialize the test result counters</span>
+<span class="s1">pass_count </span><span class="s2">= </span><span class="s4">0</span>
+<span class="s1">fail_count </span><span class="s2">= </span><span class="s4">0</span>
+
+<span class="s3"># Function to print results based on assertions or checks</span>
+<span class="s0">def </span><span class="s1">print_result</span><span class="s2">(</span><span class="s1">status</span><span class="s2">, </span><span class="s1">message</span><span class="s2">):</span>
+    <span class="s0">global </span><span class="s1">pass_count</span><span class="s2">, </span><span class="s1">fail_count</span>
+    <span class="s1">print</span><span class="s2">(</span><span class="s5">f&quot;======</span><span class="s0">{</span><span class="s1">status</span><span class="s0">}</span><span class="s5">===== </span><span class="s0">{</span><span class="s1">message</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s0">if </span><span class="s1">status </span><span class="s2">== </span><span class="s5">&quot;PASS&quot;</span><span class="s2">:</span>
+        <span class="s1">pass_count </span><span class="s2">+= </span><span class="s4">1</span>
+    <span class="s0">else</span><span class="s2">:</span>
+        <span class="s1">fail_count </span><span class="s2">+= </span><span class="s4">1</span>
+
+<span class="s3"># Set up the WebDriver</span>
+<span class="s1">driver </span><span class="s2">= </span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">Chrome</span><span class="s2">()</span>
+<span class="s1">driver</span><span class="s2">.</span><span class="s1">maximize_window</span><span class="s2">()</span>
+
+<span class="s3"># Navigate to the target page</span>
+<span class="s1">driver</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s5">&quot;https://softekogradecalculator.netlify.app/calculator/grade-calculator?type=percentage&quot;</span><span class="s2">)</span>
+
+<span class="s3"># Initialize WebDriverWait</span>
+<span class="s1">wait </span><span class="s2">= </span><span class="s1">WebDriverWait</span><span class="s2">(</span><span class="s1">driver</span><span class="s2">, </span><span class="s4">10</span><span class="s2">)</span>
+
+<span class="s3"># Loop to repeat the process 10 times</span>
+<span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s4">10</span><span class="s2">):</span>
+    <span class="s3"># Find &quot;+ Add new row&quot; button</span>
+    <span class="s0">try</span><span class="s2">:</span>
+        <span class="s1">add_new_row_button </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+            <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//button[normalize-space(text())='+ Add new row']&quot;</span><span class="s2">))</span>
+        <span class="s2">)</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;PASS&quot;</span><span class="s2">, </span><span class="s5">f&quot;Add New Row button found on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;FAIL&quot;</span><span class="s2">, </span><span class="s5">f&quot;Add New Row button not found on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">: </span><span class="s0">{</span><span class="s1">str</span><span class="s2">(</span><span class="s1">e</span><span class="s2">)</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+
+    <span class="s3"># Input assignment and project values</span>
+    <span class="s1">assignment_input </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+        <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//input[@placeholder='e.g Assignment']&quot;</span><span class="s2">))</span>
+    <span class="s2">)</span>
+    <span class="s1">assignment_input</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">()</span>
+    <span class="s1">assignment_input</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s5">f&quot;Assignment </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+
+    <span class="s1">grade_input </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+        <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//input[@name='rows.0.grade']&quot;</span><span class="s2">))</span>
+    <span class="s2">)</span>
+    <span class="s1">grade_input</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">()</span>
+    <span class="s1">grade_input</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s5">&quot;50&quot;</span><span class="s2">)</span>
+
+    <span class="s1">weight_input </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+        <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//input[@name='rows.0.weight']&quot;</span><span class="s2">))</span>
+    <span class="s2">)</span>
+    <span class="s1">weight_input</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">()</span>
+    <span class="s1">weight_input</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s5">&quot;100&quot;</span><span class="s2">)</span>
+
+    <span class="s1">project_input </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+        <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//input[@placeholder='e.g Project']&quot;</span><span class="s2">))</span>
+    <span class="s2">)</span>
+    <span class="s1">project_input</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">()</span>
+    <span class="s1">project_input</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s5">f&quot;Project </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+
+    <span class="s1">grade_input1 </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+        <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//input[@name='rows.1.grade']&quot;</span><span class="s2">))</span>
+    <span class="s2">)</span>
+    <span class="s1">grade_input1</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">()</span>
+    <span class="s1">grade_input1</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s5">&quot;45&quot;</span><span class="s2">)</span>
+
+    <span class="s1">weight_input1 </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+        <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//input[@name='rows.1.weight']&quot;</span><span class="s2">))</span>
+    <span class="s2">)</span>
+    <span class="s1">weight_input1</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">()</span>
+    <span class="s1">weight_input1</span><span class="s2">.</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s5">&quot;60&quot;</span><span class="s2">)</span>
+
+    <span class="s1">time</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">1</span><span class="s2">)</span>
+
+    <span class="s3"># Click &quot;+ Add new row&quot; button</span>
+    <span class="s0">try</span><span class="s2">:</span>
+        <span class="s1">add_new_row_button</span><span class="s2">.</span><span class="s1">click</span><span class="s2">()</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;PASS&quot;</span><span class="s2">, </span><span class="s5">f&quot;Successfully clicked Add New Row button on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;FAIL&quot;</span><span class="s2">, </span><span class="s5">f&quot;Error clicking Add New Row button on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">: </span><span class="s0">{</span><span class="s1">str</span><span class="s2">(</span><span class="s1">e</span><span class="s2">)</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+        <span class="s1">driver</span><span class="s2">.</span><span class="s1">execute_script</span><span class="s2">(</span><span class="s5">&quot;arguments[0].click();&quot;</span><span class="s2">, </span><span class="s1">add_new_row_button</span><span class="s2">)</span>
+
+    <span class="s3"># Check if a new row was added</span>
+    <span class="s0">try</span><span class="s2">:</span>
+        <span class="s1">row_added </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+            <span class="s1">EC</span><span class="s2">.</span><span class="s1">presence_of_element_located</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//div[@id='targeted-container']//div[contains(@class, 'row-container') and contains(text(), 'Assignment')]&quot;</span><span class="s2">))</span>
+        <span class="s2">)</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;PASS&quot;</span><span class="s2">, </span><span class="s5">f&quot;New row was successfully added on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;FAIL&quot;</span><span class="s2">, </span><span class="s5">f&quot;New row was not added on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">: </span><span class="s0">{</span><span class="s1">str</span><span class="s2">(</span><span class="s1">e</span><span class="s2">)</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+
+    <span class="s3"># Click the &quot;Reset/Clear&quot; button and verify clearing fields</span>
+    <span class="s1">reset_clear </span><span class="s2">= </span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+        <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">((</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s5">&quot;//button[normalize-space()='Reset/Clear']&quot;</span><span class="s2">))</span>
+    <span class="s2">)</span>
+    <span class="s0">try</span><span class="s2">:</span>
+        <span class="s1">reset_clear</span><span class="s2">.</span><span class="s1">click</span><span class="s2">()</span>
+        <span class="s3"># Verify that fields are cleared (basic assertion to see if inputs are empty)</span>
+        <span class="s0">assert </span><span class="s1">assignment_input</span><span class="s2">.</span><span class="s1">get_attribute</span><span class="s2">(</span><span class="s5">&quot;value&quot;</span><span class="s2">) == </span><span class="s5">&quot;&quot;</span><span class="s2">, </span><span class="s5">&quot;Assignment field not cleared&quot;</span>
+        <span class="s0">assert </span><span class="s1">grade_input</span><span class="s2">.</span><span class="s1">get_attribute</span><span class="s2">(</span><span class="s5">&quot;value&quot;</span><span class="s2">) == </span><span class="s5">&quot;&quot;</span><span class="s2">, </span><span class="s5">&quot;Grade field not cleared&quot;</span>
+        <span class="s0">assert </span><span class="s1">weight_input</span><span class="s2">.</span><span class="s1">get_attribute</span><span class="s2">(</span><span class="s5">&quot;value&quot;</span><span class="s2">) == </span><span class="s5">&quot;&quot;</span><span class="s2">, </span><span class="s5">&quot;Weight field not cleared&quot;</span>
+        <span class="s0">assert </span><span class="s1">project_input</span><span class="s2">.</span><span class="s1">get_attribute</span><span class="s2">(</span><span class="s5">&quot;value&quot;</span><span class="s2">) == </span><span class="s5">&quot;&quot;</span><span class="s2">, </span><span class="s5">&quot;Project field not cleared&quot;</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;PASS&quot;</span><span class="s2">, </span><span class="s5">f&quot;Successfully clicked Reset/Clear button and cleared fields on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s0">except </span><span class="s1">AssertionError </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;FAIL&quot;</span><span class="s2">, </span><span class="s5">f&quot;Fields not cleared after Reset/Clear on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">: </span><span class="s0">{</span><span class="s1">str</span><span class="s2">(</span><span class="s1">e</span><span class="s2">)</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+        <span class="s1">print_result</span><span class="s2">(</span><span class="s5">&quot;FAIL&quot;</span><span class="s2">, </span><span class="s5">f&quot;Error clicking Reset/Clear button on iteration </span><span class="s0">{</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s0">}</span><span class="s5">: </span><span class="s0">{</span><span class="s1">str</span><span class="s2">(</span><span class="s1">e</span><span class="s2">)</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+        <span class="s1">driver</span><span class="s2">.</span><span class="s1">execute_script</span><span class="s2">(</span><span class="s5">&quot;arguments[0].click();&quot;</span><span class="s2">, </span><span class="s1">reset_clear</span><span class="s2">)</span>
+
+<span class="s3"># Print the summary of test results</span>
+<span class="s1">print</span><span class="s2">(</span><span class="s5">f&quot;</span><span class="s0">\n</span><span class="s5">Total tests run: </span><span class="s0">{</span><span class="s1">pass_count </span><span class="s2">+ </span><span class="s1">fail_count</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+<span class="s1">print</span><span class="s2">(</span><span class="s5">f&quot;Passed: </span><span class="s0">{</span><span class="s1">pass_count</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+<span class="s1">print</span><span class="s2">(</span><span class="s5">f&quot;Failed: </span><span class="s0">{</span><span class="s1">fail_count</span><span class="s0">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+
+<span class="s3"># Wait for the user to inspect the results and then close the browser</span>
+<span class="s1">input</span><span class="s2">(</span><span class="s5">&quot;Press Enter to close...&quot;</span><span class="s2">)</span>
+<span class="s1">driver</span><span class="s2">.</span><span class="s1">quit</span><span class="s2">()</span>
+</pre>
+</body>
+</html>
